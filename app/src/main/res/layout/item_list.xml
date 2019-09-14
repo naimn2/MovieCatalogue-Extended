@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_marginLeft="@dimen/item_horizontal_margin"
+        android:layout_marginRight="@dimen/item_horizontal_margin"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="@dimen/item_vertical_margin"
+        android:padding="7dp"
+        android:elevation="5dp"
+        tools:targetApi="lollipop">
+
+        <ImageView
+            android:id="@+id/iv_poster"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:scaleType="fitXY"
+            android:background="@color/poster_background"
+            android:contentDescription="@string/poster_movie" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/iv_poster"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@string/title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/movie_title_color"/>
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/iv_poster"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@string/movie_description"
+            android:textColor="@color/movie_description_color" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

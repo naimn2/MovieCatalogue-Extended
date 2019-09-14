@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_nav_movie"
+        android:title="@string/movie"
+        android:icon="@drawable/ic_movie_bottom_nav"/>
+    <item
+        android:id="@+id/menu_nav_tvShow"
+        android:title="@string/tv_show"
+        android:icon="@drawable/ic_tv_show_bottom_nav"/>
+    <item
+        android:id="@+id/menu_nav_favorite"
+        android:title="@string/favorite"
+        android:icon="@drawable/ic_favorite_off"/>
+</menu>

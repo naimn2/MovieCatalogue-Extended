@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MovieCatalogue5</string>
+
+    <string name="movie">Film</string>
+    <string name="tv_show">Acara TV</string>
+    <string name="change_language">Ganti Bahasa</string>
+    <string name="title">judul</string>
+    <string name="movie_description">Deskripsi Film</string>
+    <string name="poster_movie">Poster Film</string>
+    <string name="rating">Peringkat</string>
+    <string name="release_date">Tanggal Rilis</string>
+    <string name="popularity">Popularitas</string>
+    <string name="language">Bahasa</string>
+    <string name="overview">Deskripsi</string>
+    <string name="value">-</string>
+    <string name="backdrop_movie">Latar Film</string>
+    <string name="details">Rincian</string>
+
+    <string name="favorite">Favorit</string>
+    <string name="add_favorite">Ditambahkan ke Favorit</string>
+    <string name="fail_favorite">Gagal Menambahkan ke Favorit</string>
+    <string name="remove_favorite">Dihapus dari Favorit</string>
+    <string name="fail_remove">Gagal Menghapus dari Favorit</string>
+</resources>

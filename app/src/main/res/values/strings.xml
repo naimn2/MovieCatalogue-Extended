@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">MovieCatalogue5</string>
+
+    <string name="movie">Movie</string>
+    <string name="tv_show">TV Show</string>
+    <string name="change_language">Change Language</string>
+    <string name="title">title</string>
+    <string name="movie_description">Movie Description</string>
+    <string name="poster_movie">Poster Movie</string>
+    <string name="rating">Rating</string>
+    <string name="release_date">Release Date</string>
+    <string name="popularity">Popularity</string>
+    <string name="language">Language</string>
+    <string name="overview">Overview</string>
+    <string name="value">-</string>
+    <string name="backdrop_movie">backdrop movie</string>
+    <string name="details">Details</string>
+
+    <string name="favorite">Favorite</string>
+    <string name="add_favorite">Added to favorite</string>
+    <string name="fail_favorite">Failed to add to favorite</string>
+    <string name="remove_favorite">Removed from favorite</string>
+    <string name="fail_remove">Failed to remove from favorite</string>
+</resources>

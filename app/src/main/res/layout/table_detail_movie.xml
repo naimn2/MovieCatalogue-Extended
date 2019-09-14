@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TableRow android:layout_weight="1">
+
+        <TextView
+            style="@style/TableLayoutText.Tag"
+            android:text="@string/rating"/>
+
+        <TextView
+            style="@style/TableLayoutText.Tag"
+            android:text="@string/release_date"/>
+
+    </TableRow>
+
+    <TableRow android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_rating"
+            style="@style/TableLayoutText.Value"/>
+
+        <TextView
+            android:id="@+id/tv_release"
+            style="@style/TableLayoutText.Value"/>
+
+    </TableRow>
+
+    <TableRow android:layout_weight="1">
+
+        <TextView
+            style="@style/TableLayoutText.Tag"
+            android:text="@string/popularity"/>
+
+        <TextView
+            style="@style/TableLayoutText.Tag"
+            android:text="@string/language"/>
+
+    </TableRow>
+
+    <TableRow android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_popularity"
+            style="@style/TableLayoutText.Value"/>
+
+        <TextView
+            android:id="@+id/tv_language"
+            style="@style/TableLayoutText.Value"
+            android:textAllCaps="true"/>
+
+    </TableRow>
+
+</TableLayout>
