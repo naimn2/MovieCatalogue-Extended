@@ -5,4 +5,10 @@
         android:id="@+id/menu_change_language"
         android:title="@string/change_language"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_search"
+        android:title="@string/search"
+        app:showAsAction="always"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_search"/>
 </menu>

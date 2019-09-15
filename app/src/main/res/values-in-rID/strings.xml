@@ -22,4 +22,5 @@
     <string name="fail_favorite">Gagal Menambahkan ke Favorit</string>
     <string name="remove_favorite">Dihapus dari Favorit</string>
     <string name="fail_remove">Gagal Menghapus dari Favorit</string>
+    <string name="search">Cari</string>
 </resources>

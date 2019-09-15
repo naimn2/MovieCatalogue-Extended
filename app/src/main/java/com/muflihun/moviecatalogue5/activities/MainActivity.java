@@ -6,12 +6,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.muflihun.moviecatalogue5.R;
 import com.muflihun.moviecatalogue5.fragments.FavoriteFragment;
 import com.muflihun.moviecatalogue5.fragments.FavoriteMovieFragment;
@@ -21,6 +23,7 @@ import com.muflihun.moviecatalogue5.fragments.TVShowFragment;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNav;
+    private MaterialSearchView msv;
 
     public final static String STATE_ID_MENU_ITEM_BOTTOM_NAV = "idMenuItem";
 
@@ -29,7 +32,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = findViewById(R.id.toolbar_main);
+        setSupportActionBar(toolbar);
         bottomNav = findViewById(R.id.bottom_nav);
+        msv = findViewById(R.id.msv_main);
 
         String title = null;
 
@@ -55,6 +61,32 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null){
             getSupportActionBar().setTitle(title);
         }
+
+        msv.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = null;
+                switch (bottomNav.getSelectedItemId()) {
+                    case R.id.menu_nav_movie:
+                        intent = new Intent(getApplicationContext(), SearchMovie.class);
+                        break;
+                    case R.id.menu_nav_tvShow:
+                        intent = new Intent(getApplicationContext(), SearchTv.class);
+                        break;
+                }
+                if (intent!=null) {
+                    intent.putExtra(SearchMovie.EXTRA_QUERY, query);
+                    startActivity(intent);
+                    msv.closeSearch();
+                    return true;
+                } else return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -93,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.menu_search);
+        msv.setMenuItem(menuItem);
         return super.onCreateOptionsMenu(menu);
     }
 

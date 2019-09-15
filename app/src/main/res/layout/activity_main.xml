@@ -6,17 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/MyToolbar"
+        app:titleTextColor="@android:color/white"/>
+
+    <com.miguelcatalan.materialsearchview.MaterialSearchView
+        android:id="@+id/msv_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:searchBackIcon="@drawable/ic_arrow_back"
+        app:searchBackground="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        app:searchCloseIcon="@drawable/ic_close"
+        android:textColorHint="@android:color/white"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:theme="@style/AppTheme"
         app:menu="@menu/bottom_nav_menu"/>
 
     <FrameLayout
         android:id="@+id/fr_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_nav" />
+        android:layout_above="@+id/bottom_nav"
+        android:layout_below="@+id/toolbar_main"/>
 
 </RelativeLayout>
