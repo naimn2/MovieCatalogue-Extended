@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
@@ -16,8 +15,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.muflihun.moviecatalogue5.R;
 import com.muflihun.moviecatalogue5.fragments.FavoriteFragment;
-import com.muflihun.moviecatalogue5.fragments.FavoriteMovieFragment;
-import com.muflihun.moviecatalogue5.fragments.FavoriteTvFragment;
 import com.muflihun.moviecatalogue5.fragments.MovieFragment;
 import com.muflihun.moviecatalogue5.fragments.TVShowFragment;
 

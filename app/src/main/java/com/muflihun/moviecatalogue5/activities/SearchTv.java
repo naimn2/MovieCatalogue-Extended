@@ -60,7 +60,7 @@ public class SearchTv extends AppCompatActivity implements ListItemAdapter.OnIte
 
         tvViewModel = ViewModelProviders.of(this).get(ItemViewModel.class);
         tvViewModel.getListItem().observe(this, tvObserver);
-        tvViewModel.setItem(ItemViewModel.LIST_TV_URL, ItemViewModel.ITEM_TVSHOW);
+        tvViewModel.setItem(ItemViewModel.SEARCH_TV_URL, ItemViewModel.ITEM_TVSHOW);
         showLoading(true);
     }
 

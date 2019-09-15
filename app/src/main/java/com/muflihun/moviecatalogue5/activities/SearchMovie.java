@@ -60,7 +60,7 @@ public class SearchMovie extends AppCompatActivity implements ListItemAdapter.On
 
         movieViewModel = ViewModelProviders.of(this).get(ItemViewModel.class);
         movieViewModel.getListItem().observe(this, movieObserver);
-        movieViewModel.setItem(String.format(ItemViewModel.FAVORITE_MOVIE_URL, query), ItemViewModel.ITEM_MOVIE);
+        movieViewModel.setItem(String.format(ItemViewModel.SEARCH_MOVIE_URL, query), ItemViewModel.ITEM_MOVIE);
         showLoading(true);
     }
 

@@ -23,8 +23,8 @@ public class ItemViewModel extends ViewModel {
     public static final String ITEM_TVSHOW = "tv";
     public static final String LIST_MOVIE_URL = "https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+"&language=en-US";
     public static final String LIST_TV_URL = "https://api.themoviedb.org/3/discover/tv?api_key="+API_KEY+"&language=en-US";
-    public static final String FAVORITE_MOVIE_URL = "https://api.themoviedb.org/3/search/movie?api_key="+API_KEY+"&language=en-US&query=%s";
-    public static final String FAVORITE_TV_URL = "";
+    public static final String SEARCH_MOVIE_URL = "https://api.themoviedb.org/3/search/movie?api_key="+API_KEY+"&language=en-US&query=%s";
+    public static final String SEARCH_TV_URL = "https://api.themoviedb.org/3/search/tv?api_key="+API_KEY+"&language=en-US&query=%s";
     private MutableLiveData<ArrayList<Item>> listItem = new MutableLiveData<>();
 
     public MutableLiveData<ArrayList<Item>> getListItem() {
