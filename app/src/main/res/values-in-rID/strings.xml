@@ -23,4 +23,6 @@
     <string name="remove_favorite">Dihapus dari Favorit</string>
     <string name="fail_remove">Gagal Menghapus dari Favorit</string>
     <string name="search">Cari</string>
+    <string name="empty_text">Tidak Ada Data</string>
+    <string name="favorite_movie">Film Favorit</string>
 </resources>

@@ -8,4 +8,5 @@
     <color name="movie_description_color">#575757</color>
     <color name="textColor">#2B2B2B</color>
     <color name="no_image">#646161</color>
+    <color name="widget_title_text">#FFFFFF</color>
 </resources>

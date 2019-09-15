@@ -11,12 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.SearchTv"></activity>
+        <receiver android:name=".widgets.FavoriteMovieWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favorite_movie_widget_info" />
+        </receiver>
+
+        <activity android:name=".activities.SearchTv" />
         <activity android:name=".activities.SearchMovie" />
-        <activity android:name=".activities.DetailTv"
-            android:label="@string/details"/>
-        <activity android:name=".activities.DetailMovie"
-            android:label="@string/details"/>
+        <activity
+            android:name=".activities.DetailTv"
+            android:label="@string/details" />
+        <activity
+            android:name=".activities.DetailMovie"
+            android:label="@string/details" />
         <activity
             android:name=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -26,6 +38,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name="com.muflihun.moviecatalogue5.services.StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>

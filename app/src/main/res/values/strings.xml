@@ -22,4 +22,6 @@
     <string name="remove_favorite">Removed from favorite</string>
     <string name="fail_remove">Failed to remove from favorite</string>
     <string name="search">Search</string>
+    <string name="empty_text">No Data</string>
+    <string name="favorite_movie">Favorite Movie</string>
 </resources>
