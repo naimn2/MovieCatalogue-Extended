@@ -34,12 +34,13 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onDataSetChanged() {
-
+        listItem.clear();
+        listItem.addAll(movieHelper.getAllMovies());
     }
 
     @Override
     public void onDestroy() {
-
+        movieHelper.close();
     }
 
     @Override
@@ -50,7 +51,13 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public RemoteViews getViewAt(int i) {
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_item);
-        Uri uri = Uri.parse("https://image.tmdb.org/t/p/w185"+listItem.get(i).getPoster()).buildUpon().build();
+//        Uri uri = Uri.parse("https://image.tmdb.org/t/p/w185"+listItem.get(i).getPoster());
+        Uri uri = Uri.parse("https://image.tmdb.org/").buildUpon()
+                .appendPath("t")
+                .appendPath("p")
+                .appendPath("w185")
+                .appendPath(listItem.get(i).getPoster())
+                .build();
         rv.setImageViewUri(R.id.iv_poster_widget, uri);
 
         Bundle extras = new Bundle();
