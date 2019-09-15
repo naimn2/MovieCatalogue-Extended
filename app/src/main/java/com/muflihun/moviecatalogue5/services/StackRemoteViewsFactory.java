@@ -8,6 +8,7 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.muflihun.moviecatalogue5.R;
+import com.muflihun.moviecatalogue5.db.MovieHelper;
 import com.muflihun.moviecatalogue5.models.Item;
 import com.muflihun.moviecatalogue5.widgets.FavoriteMovieWidget;
 
@@ -16,13 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
-    private final ArrayList<Item> listItem = new ArrayList<>();
+    private ArrayList<Item> listItem;
+    private MovieHelper movieHelper;
     private final Context mContext;
 
-    StackRemoteViewsFactory(Context context, ArrayList<Item> listItem) {
+    StackRemoteViewsFactory(Context context) {
         mContext = context;
-        this.listItem.clear();
-        this.listItem.addAll(listItem);
+        listItem = new ArrayList<>();
+        movieHelper = MovieHelper.getInstance(mContext);
     }
 
     @Override
