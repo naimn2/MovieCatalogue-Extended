@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         bottomNav = findViewById(R.id.bottom_nav);
         msv = findViewById(R.id.msv_main);
+        msv.setHint(getResources().getString(R.string.search));
 
         String title = null;
 
