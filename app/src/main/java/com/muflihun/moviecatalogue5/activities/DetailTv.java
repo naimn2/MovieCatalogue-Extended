@@ -48,7 +48,6 @@ public class DetailTv extends AppCompatActivity {
         item = getIntent().getParcelableExtra(EXTRA_ITEM);
 
         tvHelper = tvHelper.getInstance(this);
-        tvHelper.open();
 
         tvTitle.setText(item.getTitle());
         tvDesc.setText(item.getOverview());
@@ -65,6 +64,7 @@ public class DetailTv extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home){
             finish();
         } else if (item.getItemId() == R.id.menu_favorite){
+            tvHelper.open();
             if (!tvHelper.isExist(this.item.getId())){
                 item.setIcon(R.drawable.ic_favorite_on);
                 addToFavorite();
@@ -73,6 +73,7 @@ public class DetailTv extends AppCompatActivity {
                 item.setIcon(R.drawable.ic_favorite_off);
                 removeFromFavorite();
             }
+            tvHelper.close();
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
             ComponentName thisWidget = new ComponentName(this, FavoriteMovieWidget.class);
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
@@ -83,10 +84,11 @@ public class DetailTv extends AppCompatActivity {
 
     private void addToFavorite(){
         long result = tvHelper.insert(this.item);
-        if (result>0)
+        if (result>0) {
             Toast.makeText(this, getResources().getString(R.string.add_favorite), Toast.LENGTH_SHORT).show();
-        else
+        } else {
             Toast.makeText(this, getResources().getString(R.string.fail_favorite), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void removeFromFavorite(){
@@ -106,15 +108,11 @@ public class DetailTv extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        tvHelper.open();
         if (tvHelper.isExist(item.getId())){
             menu.findItem(R.id.menu_favorite).setIcon(R.drawable.ic_favorite_on);
         }
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
         tvHelper.close();
+        return super.onPrepareOptionsMenu(menu);
     }
 }

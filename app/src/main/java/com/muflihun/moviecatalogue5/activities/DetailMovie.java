@@ -48,7 +48,6 @@ public class DetailMovie extends AppCompatActivity {
         item = getIntent().getParcelableExtra(EXTRA_ITEM);
 
         movieHelper = MovieHelper.getInstance(this);
-        movieHelper.open();
 
         tvTitle.setText(item.getTitle());
         tvDesc.setText(item.getOverview());
@@ -65,6 +64,7 @@ public class DetailMovie extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home){
             finish();
         } else if (item.getItemId() == R.id.menu_favorite){
+            movieHelper.open();
             if (!movieHelper.isExist(this.item.getId())){
                 item.setIcon(R.drawable.ic_favorite_on);
                 addToFavorite();
@@ -73,6 +73,7 @@ public class DetailMovie extends AppCompatActivity {
                 item.setIcon(R.drawable.ic_favorite_off);
                 removeFromFavorite();
             }
+            movieHelper.close();
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
             ComponentName thisWidget = new ComponentName(this, FavoriteMovieWidget.class);
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
@@ -106,15 +107,11 @@ public class DetailMovie extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        movieHelper.open();
         if (movieHelper.isExist(item.getId())){
             menu.findItem(R.id.menu_favorite).setIcon(R.drawable.ic_favorite_on);
         }
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
         movieHelper.close();
+        return super.onPrepareOptionsMenu(menu);
     }
 }
