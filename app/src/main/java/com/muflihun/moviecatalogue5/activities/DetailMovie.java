@@ -8,7 +8,10 @@ import com.muflihun.moviecatalogue5.R;
 import com.muflihun.moviecatalogue5.db.DatabaseContract;
 import com.muflihun.moviecatalogue5.db.MovieHelper;
 import com.muflihun.moviecatalogue5.models.Item;
+import com.muflihun.moviecatalogue5.widgets.FavoriteMovieWidget;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -70,6 +73,10 @@ public class DetailMovie extends AppCompatActivity {
                 item.setIcon(R.drawable.ic_favorite_off);
                 removeFromFavorite();
             }
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+            ComponentName thisWidget = new ComponentName(this, FavoriteMovieWidget.class);
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.stack_view);
         }
         return super.onOptionsItemSelected(item);
     }

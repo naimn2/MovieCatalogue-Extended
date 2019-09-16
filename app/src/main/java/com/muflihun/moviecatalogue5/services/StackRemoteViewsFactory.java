@@ -13,6 +13,7 @@ import android.widget.RemoteViewsService;
 
 import com.muflihun.moviecatalogue5.R;
 import com.muflihun.moviecatalogue5.db.MovieHelper;
+import com.muflihun.moviecatalogue5.db.TvHelper;
 import com.muflihun.moviecatalogue5.models.Item;
 import com.muflihun.moviecatalogue5.widgets.FavoriteMovieWidget;
 
@@ -41,11 +42,15 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public void onDataSetChanged() {
         MovieHelper movieHelper = MovieHelper.getInstance(mContext);
+        TvHelper tvHelper = TvHelper.getInstance(mContext);
         movieHelper.open();
+        tvHelper.open();
         listItem.clear();
         listItem.addAll(movieHelper.getAllMovies());
+        listItem.addAll(tvHelper.getAllMovies());
         Log.d(TAG, "" + listItem.size());
         movieHelper.close();
+        tvHelper.close();
     }
 
     @Override

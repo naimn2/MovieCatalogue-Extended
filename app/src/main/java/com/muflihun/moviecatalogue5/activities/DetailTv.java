@@ -3,6 +3,8 @@ package com.muflihun.moviecatalogue5.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.muflihun.moviecatalogue5.R;
 import com.muflihun.moviecatalogue5.db.TvHelper;
 import com.muflihun.moviecatalogue5.models.Item;
+import com.muflihun.moviecatalogue5.widgets.FavoriteMovieWidget;
 
 public class DetailTv extends AppCompatActivity {
     private TextView tvTitle, tvDesc, tvPopularity, tvRating, tvRelease, tvLanguage;
@@ -70,6 +73,10 @@ public class DetailTv extends AppCompatActivity {
                 item.setIcon(R.drawable.ic_favorite_off);
                 removeFromFavorite();
             }
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+            ComponentName thisWidget = new ComponentName(this, FavoriteMovieWidget.class);
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.stack_view);
         }
         return super.onOptionsItemSelected(item);
     }
