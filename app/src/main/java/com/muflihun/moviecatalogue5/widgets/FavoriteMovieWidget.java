@@ -51,6 +51,7 @@ public class FavoriteMovieWidget extends AppWidgetProvider {
                 Toast.makeText(context, "Touched view " + viewIndex, Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 
     @Override
