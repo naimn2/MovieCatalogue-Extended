@@ -66,16 +66,18 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public RemoteViews getViewAt(int i) {
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_item);
-        InputStream inputStream = null;
-        try {
-            inputStream = new URL("https://image.tmdb.org/t/p/w185"+listItem.get(i).getBackdrop()).openStream();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (listItem.size()>0){
+            InputStream inputStream = null;
+            try {
+                inputStream = new URL("https://image.tmdb.org/t/p/w185"+listItem.get(i).getBackdrop()).openStream();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            rv.setImageViewBitmap(R.id.iv_poster_widget, BitmapFactory.decodeStream(inputStream));
+            rv.setTextViewText(R.id.tv_title_widget, listItem.get(i).getTitle());
         }
-        rv.setImageViewBitmap(R.id.iv_poster_widget, BitmapFactory.decodeStream(inputStream));
-        rv.setTextViewText(R.id.tv_title_widget, listItem.get(i).getTitle());
 
         Bundle extras = new Bundle();
         extras.putInt(FavoriteMovieWidget.EXTRA_ITEM, i);

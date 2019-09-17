@@ -38,7 +38,7 @@ public class FavoriteFragment extends Fragment {
         Log.d(TAG, "onViewCreated: ");
         final ViewPager viewPager = view.findViewById(R.id.vp_fav);
         TabLayout tabFav = view.findViewById(R.id.tl_fav);
-        PagerAdapter pagerAdapter = new PagerAdapter(getContext(), getChildFragmentManager());
+        PagerAdapter pagerAdapter = new PagerAdapter(getChildFragmentManager(), 2, getContext());
         Fragment movieFavFragment = new FavoriteMovieFragment();
         Fragment tvShowFavFragment = new FavoriteTvFragment();
         pagerAdapter.attach(movieFavFragment, getResources().getString(R.string.movie));

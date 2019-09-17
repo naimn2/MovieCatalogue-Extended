@@ -15,11 +15,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
     private Context context;
     private List<Fragment> fragments;
     private List<String> fragmentTitles;
-    private static final String[] TAB_TITLES = new String[2];
-    private static final String TAG = "PagerAdapter";
 
-    public PagerAdapter(Context context, @NonNull FragmentManager fm) {
-        super(fm);
+    public PagerAdapter(@NonNull FragmentManager fm, int behavior, Context context) {
+        super(fm, behavior);
         this.context = context;
         fragments = new ArrayList<>();
         fragmentTitles = new ArrayList<>();
