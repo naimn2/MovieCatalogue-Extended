@@ -11,6 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.SetReminderActivity"
+            android:label="@string/title_activity_set_reminder"></activity>
+
         <receiver
             android:name=".broadcasts.AlarmReceiver"
             android:enabled="true"
@@ -42,8 +46,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
-            android:name="com.muflihun.moviecatalogue5.services.StackWidgetService"
+            android:name=".services.StackWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
