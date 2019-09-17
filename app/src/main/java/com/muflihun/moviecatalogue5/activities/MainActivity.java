@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.muflihun.moviecatalogue5.R;
+import com.muflihun.moviecatalogue5.broadcasts.AlarmReceiver;
 import com.muflihun.moviecatalogue5.fragments.FavoriteFragment;
 import com.muflihun.moviecatalogue5.fragments.MovieFragment;
 import com.muflihun.moviecatalogue5.fragments.TVShowFragment;
@@ -21,8 +22,11 @@ import com.muflihun.moviecatalogue5.fragments.TVShowFragment;
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNav;
     private MaterialSearchView msv;
+    private AlarmReceiver alarmReceiver;
 
-    public final static String STATE_ID_MENU_ITEM_BOTTOM_NAV = "idMenuItem";
+    public static final String STATE_ID_MENU_ITEM_BOTTOM_NAV = "idMenuItem";
+    public static final String DAILY_REMINDER_TIME = "07:00";
+    public static final String DAILY_REMINDER_MESSAGE = "BALIK LAGI DONG :)";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottom_nav);
         msv = findViewById(R.id.msv_main);
         msv.setHint(getResources().getString(R.string.search));
+
+        alarmReceiver = new AlarmReceiver();
+        alarmReceiver.setUpAlarm(this, DAILY_REMINDER_TIME, DAILY_REMINDER_MESSAGE);
 
         String title = null;
 
