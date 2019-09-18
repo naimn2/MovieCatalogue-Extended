@@ -11,16 +11,22 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.muflihun.moviecatalogue5.R;
+import com.muflihun.moviecatalogue5.models.Item;
+import com.muflihun.moviecatalogue5.viewmodels.ItemViewModel;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -30,7 +36,19 @@ public class AlarmReceiver extends BroadcastReceiver {
     public static final String EXTRA_TITLE = "title";
     public static final String DAILY_REMINDER_TYPE = "daily";
     public static final String RELEASE_REMINDER_TYPE = "release";
+
+    final String TAG = AlarmReceiver.class.getSimpleName();
     private final int _ID = 101;
+
+    private ItemViewModel movieViewModel;
+
+    Observer<ArrayList<Item>> obsrever = new Observer<ArrayList<Item>>() {
+        @Override
+        public void onChanged(ArrayList<Item> items) {
+            // get ArrayList
+        }
+    };
+
     @Override
     public void onReceive(Context context, Intent intent) {
         String message = intent.getStringExtra(EXTRA_MESSAGE);
@@ -41,13 +59,14 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     public void setUpAlarm(Context context, String time, String message, String type) {
 
-        if (isDateInvalid(time, TIME_FORMAT)) return;
+        if (isDateInvalid(time, TIME_FORMAT)) {
+            return;
+        }
 
         if (type.equals(DAILY_REMINDER_TYPE)) {
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(context, AlarmReceiver.class);
             intent.putExtra(EXTRA_MESSAGE, message);
-//        intent.putExtra(EXTRA_TYPE, type);
 
             String timeArray[] = time.split(":");
 
@@ -60,12 +79,35 @@ public class AlarmReceiver extends BroadcastReceiver {
             if (alarmManager != null) {
                 alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
             }
-        } else if (type.equals(RELEASE_REMINDER_TYPE)){
-            Date d = new Date();
-            CharSequence date = android.text.format.DateFormat.format(DATE_FORMAT, d.getTime());
+        }
+//        Toast.makeText(context, "Repeating alarm set up", Toast.LENGTH_SHORT).show();
+    }
+
+    public void setUpReleaseAlarm(Context context, String time, ArrayList<Item> listItem){
+        if (isDateInvalid(time, TIME_FORMAT)) {
+            return;
         }
 
-//        Toast.makeText(context, "Repeating alarm set up", Toast.LENGTH_SHORT).show();
+        String message = null;
+        if (listItem.size()>0) {
+            message = listItem.get(0).getTitle();
+        }
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        intent.putExtra(EXTRA_MESSAGE, message);
+
+        String timeArray[] = time.split(":");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+        calendar.set(Calendar.SECOND, 0);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, _ID, intent, 0);
+        if (alarmManager != null) {
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
     }
 
     public void showAlarmNotification(Context context, String title, String message, int notifId){

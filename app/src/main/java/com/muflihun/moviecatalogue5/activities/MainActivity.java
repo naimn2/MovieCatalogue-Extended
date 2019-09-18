@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +20,13 @@ import com.muflihun.moviecatalogue5.broadcasts.AlarmReceiver;
 import com.muflihun.moviecatalogue5.fragments.FavoriteFragment;
 import com.muflihun.moviecatalogue5.fragments.MovieFragment;
 import com.muflihun.moviecatalogue5.fragments.TVShowFragment;
+import com.muflihun.moviecatalogue5.models.Item;
+import com.muflihun.moviecatalogue5.viewmodels.ItemViewModel;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import static android.provider.Settings.System.DATE_FORMAT;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNav;
@@ -27,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
     public static final String STATE_ID_MENU_ITEM_BOTTOM_NAV = "idMenuItem";
     public static final String DAILY_REMINDER_TIME = "07:00";
     public static final String DAILY_REMINDER_MESSAGE = "BALIK LAGI DONG :)";
+    public static final String RELEASE_REMINDER_TIME = "08:00";
+    public static final String RELEASE_REMINDER_URL = "https://api.themoviedb.org/3/discover/movie?api_key=%s&primary_release_date.gte=%s&primary_release_date.lte=%s";
+
+    Observer<ArrayList<Item>> observer = new Observer<ArrayList<Item>>() {
+        @Override
+        public void onChanged(ArrayList<Item> items) {
+            alarmReceiver.setUpReleaseAlarm(getApplicationContext(), RELEASE_REMINDER_TIME, items);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
         alarmReceiver = new AlarmReceiver();
         alarmReceiver.setUpAlarm(this, DAILY_REMINDER_TIME, DAILY_REMINDER_MESSAGE, AlarmReceiver.DAILY_REMINDER_TYPE);
+
+        ItemViewModel itemViewModel = ViewModelProviders.of(this).get(ItemViewModel.class);
+        itemViewModel.getListItem().observe(this, observer);
+        Date d = new Date();
+        CharSequence date = android.text.format.DateFormat.format(DATE_FORMAT, d.getTime());
+        itemViewModel.setItem(String.format(date.toString(), ItemViewModel.API_KEY, date, date), ItemViewModel.ITEM_MOVIE);
 
         String title = null;
 
