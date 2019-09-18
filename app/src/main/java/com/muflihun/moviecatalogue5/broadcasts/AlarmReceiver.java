@@ -22,11 +22,14 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class AlarmReceiver extends BroadcastReceiver {
     public static final String EXTRA_MESSAGE = "message";
     public static final String EXTRA_TITLE = "title";
+    public static final String DAILY_REMINDER_TYPE = "daily";
+    public static final String RELEASE_REMINDER_TYPE = "release";
     private final int _ID = 101;
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -36,28 +39,33 @@ public class AlarmReceiver extends BroadcastReceiver {
         showAlarmNotification(context, title, message, notifId);
     }
 
-    public void setUpAlarm(Context context, String time, String message) {
+    public void setUpAlarm(Context context, String time, String message, String type) {
 
         if (isDateInvalid(time, TIME_FORMAT)) return;
 
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlarmReceiver.class);
-        intent.putExtra(EXTRA_MESSAGE, message);
+        if (type.equals(DAILY_REMINDER_TYPE)) {
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(context, AlarmReceiver.class);
+            intent.putExtra(EXTRA_MESSAGE, message);
 //        intent.putExtra(EXTRA_TYPE, type);
 
-        String timeArray[] = time.split(":");
+            String timeArray[] = time.split(":");
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
-        calendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
-        calendar.set(Calendar.SECOND, 0);
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+            calendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+            calendar.set(Calendar.SECOND, 0);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, _ID, intent, 0);
-        if (alarmManager != null) {
-            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, _ID, intent, 0);
+            if (alarmManager != null) {
+                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+            }
+        } else if (type.equals(RELEASE_REMINDER_TYPE)){
+            Date d = new Date();
+            CharSequence date = android.text.format.DateFormat.format(DATE_FORMAT, d.getTime());
         }
 
-        Toast.makeText(context, "Repeating alarm set up", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "Repeating alarm set up", Toast.LENGTH_SHORT).show();
     }
 
     public void showAlarmNotification(Context context, String title, String message, int notifId){
@@ -98,6 +106,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private String TIME_FORMAT = "HH:mm";
+    private String DATE_FORMAT = "yyyy-MM-dd";
 
     public boolean isDateInvalid(String date, String format) {
         try {

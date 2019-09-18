@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         msv.setHint(getResources().getString(R.string.search));
 
         alarmReceiver = new AlarmReceiver();
-        alarmReceiver.setUpAlarm(this, DAILY_REMINDER_TIME, DAILY_REMINDER_MESSAGE);
+        alarmReceiver.setUpAlarm(this, DAILY_REMINDER_TIME, DAILY_REMINDER_MESSAGE, AlarmReceiver.DAILY_REMINDER_TYPE);
 
         String title = null;
 
