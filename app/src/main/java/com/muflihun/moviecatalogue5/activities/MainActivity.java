@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         releaseReceiver = new ReleaseReceiver();
         alarmReceiver = new AlarmReceiver();
-        alarmReceiver.setUpAlarm(this, DAILY_REMINDER_TIME, DAILY_REMINDER_MESSAGE, AlarmReceiver.DAILY_REMINDER_TYPE);
+        alarmReceiver.setUpAlarm(this, DAILY_REMINDER_TIME, getResources().getString(R.string.daily_reminder), AlarmReceiver.DAILY_REMINDER_TYPE);
 
         ItemViewModel itemViewModel = ViewModelProviders.of(this).get(ItemViewModel.class);
         itemViewModel.getListItem().observe(this, observer);
@@ -170,8 +170,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu_change_language){
-            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+        Intent intent = null;
+        switch (item.getItemId()){
+            case R.id.menu_change_language:
+                intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                break;
+            case R.id.menu_set_reminder:
+                intent = new Intent(this, SetReminderActivity.class);
+                break;
+        }
+        if (intent!=null) {
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

@@ -43,9 +43,22 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String message = intent.getStringExtra(EXTRA_MESSAGE);
-        String title = intent.getStringExtra(EXTRA_TITLE);
+        String title = context.getResources().getString(R.string.daily_title);
         int notifId = _ID;
         showAlarmNotification(context, title, message, notifId);
+    }
+
+    public void cancelAlarm(Context context, String type) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, _ID, intent, 0);
+        pendingIntent.cancel();
+
+        if (alarmManager != null) {
+            alarmManager.cancel(pendingIntent);
+        }
+
+        Toast.makeText(context, "alarm dibatalkan", Toast.LENGTH_SHORT).show();
     }
 
     public void setUpAlarm(Context context, String time, String message, String type) {
@@ -73,33 +86,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
 //        Toast.makeText(context, "Repeating alarm set up", Toast.LENGTH_SHORT).show();
     }
-
-//    public void setUpReleaseAlarm(Context context, String time, ArrayList<Item> listItem){
-//        if (isDateInvalid(time, TIME_FORMAT)) {
-//            return;
-//        }
-//
-//        String message = null;
-//        if (listItem.size()>0) {
-//            message = listItem.get(0).getTitle();
-//        }
-//
-//        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(context, AlarmReceiver.class);
-//        intent.putExtra(EXTRA_MESSAGE, message);
-//
-//        String timeArray[] = time.split(":");
-//
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
-//        calendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
-//        calendar.set(Calendar.SECOND, 0);
-//
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, _ID, intent, 0);
-//        if (alarmManager != null) {
-//            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-//        }
-//    }
 
     public void showAlarmNotification(Context context, String title, String message, int notifId){
         String CHANNEL_ID = "Channel_1";

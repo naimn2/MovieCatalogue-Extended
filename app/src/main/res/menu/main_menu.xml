@@ -11,4 +11,8 @@
         app:showAsAction="always"
         android:orderInCategory="100"
         android:icon="@drawable/ic_search"/>
+    <item
+        android:id="@+id/menu_set_reminder"
+        android:title="@string/title_activity_set_reminder"
+        app:showAsAction="never"/>
 </menu>

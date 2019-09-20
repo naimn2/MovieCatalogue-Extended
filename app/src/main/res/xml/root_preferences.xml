@@ -17,8 +17,9 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <SwitchPreferenceCompat
-        app:key="dailyRemider"
-        app:title="Enable Daily Reminder" />
+        app:key="dailyReminder"
+        app:title="Enable Daily Reminder"
+        />
 
     <SwitchPreferenceCompat
         app:key="releaseReminder"

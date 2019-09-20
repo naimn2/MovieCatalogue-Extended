@@ -2,6 +2,8 @@ package com.muflihun.moviecatalogue5.activities;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,34 +39,31 @@ public class SetReminderActivity extends AppCompatActivity {
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
-        SwitchPreferenceCompat dailyReminderSwitch;
+        final static String TAG = SettingsFragment.class.getSimpleName();
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
-            dailyReminderSwitch = findPreference("dailyReminder");
-//            dailyReminderSwitch.setSwitchTextOn(DAILY_TEXT_ON);
-//            dailyReminderSwitch.setSwitchTextOff(DAILY_TEXT_OFF);
+            SwitchPreferenceCompat dailyReminderSwitch = findPreference("dailyReminder");
+            SwitchPreferenceCompat releaseReminderSwitch = findPreference("releaseReminder");
 
-            if (sp.getBoolean(PREFERENCE_DAILY_REMINDER, false)){
-                dailyReminderSwitch.setSwitchTextOn(DAILY_TEXT_ON);
-            } else {
-                dailyReminderSwitch.setSwitchTextOff(DAILY_TEXT_OFF);
-            }
-        }
+            dailyReminderSwitch.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    // Enable daily reminder
+                    Log.d(TAG, preference.getKey()+" = "+newValue);
+                    return true;
+                }
+            });
 
-        @Override
-        public boolean onPreferenceTreeClick(Preference preference) {
-            switch (preference.getKey()){
-                case "dailyRemider":
-//                    if (dailyReminderSwitch.getS)
-                    break;
-                case "releaseReminder":
-                    break;
-                default:
-            }
-            return super.onPreferenceTreeClick(preference);
-
+            releaseReminderSwitch.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    // Enable release reminder
+                    return true;
+                }
+            });
         }
     }
 }

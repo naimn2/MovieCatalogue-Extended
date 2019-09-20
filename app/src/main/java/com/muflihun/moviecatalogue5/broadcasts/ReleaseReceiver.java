@@ -12,6 +12,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
@@ -37,10 +38,23 @@ public class ReleaseReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        String title = "Release Today";
+        String title = context.getResources().getString(R.string.release_reminder);
         String message = intent.getStringExtra(EXTRA_MESSAGE_RELEASE);
         int notifId = _ID;
         showAlarmNotification(context, title, message, notifId);
+    }
+
+    public void cancelAlarm(Context context, String type) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, _ID, intent, 0);
+        pendingIntent.cancel();
+
+        if (alarmManager != null) {
+            alarmManager.cancel(pendingIntent);
+        }
+
+        Toast.makeText(context, "alarm dibatalkan", Toast.LENGTH_SHORT).show();
     }
 
     public void setUpReleaseAlarm(Context context, String time, ArrayList<Item> listItem){
@@ -58,7 +72,7 @@ public class ReleaseReceiver extends BroadcastReceiver {
                 message += movie.getTitle()+"\n";
             }
         } else {
-            message = "no data :(";
+            message = context.getResources().getString(R.string.empty_text);
         }
         Log.d(TAG, message);
 

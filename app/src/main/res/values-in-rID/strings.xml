@@ -25,4 +25,7 @@
     <string name="search">Cari</string>
     <string name="empty_text">Tidak Ada Data</string>
     <string name="favorite_movie">Film Favorit</string>
+    <string name="daily_reminder">Pengingat Harian</string>
+    <string name="daily_title">Pengingat Harian</string>
+    <string name="release_reminder">Pengingat Rilis Harian</string>
 </resources>
