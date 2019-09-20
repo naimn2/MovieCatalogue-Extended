@@ -61,6 +61,7 @@ public class SetReminderActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     // Enable release reminder
+                    Log.d(TAG, preference.getKey()+" = "+newValue);
                     return true;
                 }
             });
