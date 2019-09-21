@@ -33,9 +33,7 @@ import java.util.Locale;
 
 public class AlarmReceiver extends BroadcastReceiver {
     public static final String EXTRA_MESSAGE = "message";
-    public static final String EXTRA_TITLE = "title";
     public static final String DAILY_REMINDER_TYPE = "daily";
-//    public static final String RELEASE_REMINDER_TYPE = "release";
 
     final String TAG = AlarmReceiver.class.getSimpleName();
     private final int _ID = 101;
@@ -48,7 +46,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         showAlarmNotification(context, title, message, notifId);
     }
 
-    public void cancelAlarm(Context context, String type) {
+    public void cancelAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, _ID, intent, 0);
@@ -57,8 +55,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         if (alarmManager != null) {
             alarmManager.cancel(pendingIntent);
         }
-
-        Toast.makeText(context, "alarm dibatalkan", Toast.LENGTH_SHORT).show();
     }
 
     public void setUpAlarm(Context context, String time, String message, String type) {

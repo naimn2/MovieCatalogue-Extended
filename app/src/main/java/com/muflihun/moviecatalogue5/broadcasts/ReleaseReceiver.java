@@ -27,11 +27,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-import static com.muflihun.moviecatalogue5.broadcasts.AlarmReceiver.EXTRA_MESSAGE;
-
 public class ReleaseReceiver extends BroadcastReceiver {
     public static final String EXTRA_MESSAGE_RELEASE = "message_release";
-    public static final String RELEASE_REMINDER_TYPE = "release";
     private static final String TAG = ReleaseReceiver.class.getSimpleName();
     private final int _ID = 100;
     private ArrayList<Item> listItem = new ArrayList<>();
@@ -44,17 +41,15 @@ public class ReleaseReceiver extends BroadcastReceiver {
         showAlarmNotification(context, title, message, notifId);
     }
 
-    public void cancelAlarm(Context context, String type) {
+    public void cancelAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlarmReceiver.class);
+        Intent intent = new Intent(context, ReleaseReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, _ID, intent, 0);
         pendingIntent.cancel();
 
         if (alarmManager != null) {
             alarmManager.cancel(pendingIntent);
         }
-
-        Toast.makeText(context, "alarm dibatalkan", Toast.LENGTH_SHORT).show();
     }
 
     public void setUpReleaseAlarm(Context context, String time, ArrayList<Item> listItem){

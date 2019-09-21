@@ -4,54 +4,26 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.muflihun.moviecatalogue5.R;
-import com.muflihun.moviecatalogue5.broadcasts.AlarmReceiver;
-import com.muflihun.moviecatalogue5.broadcasts.ReleaseReceiver;
 import com.muflihun.moviecatalogue5.fragments.FavoriteFragment;
 import com.muflihun.moviecatalogue5.fragments.MovieFragment;
 import com.muflihun.moviecatalogue5.fragments.TVShowFragment;
-import com.muflihun.moviecatalogue5.models.Item;
-import com.muflihun.moviecatalogue5.viewmodels.ItemViewModel;
-
-import java.util.ArrayList;
-import java.util.Date;
-
-import static com.muflihun.moviecatalogue5.broadcasts.ReleaseReceiver.DATE_FORMAT;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private BottomNavigationView bottomNav;
     private MaterialSearchView msv;
-    private AlarmReceiver alarmReceiver;
-    private ReleaseReceiver releaseReceiver;
 
     public static final String STATE_ID_MENU_ITEM_BOTTOM_NAV = "idMenuItem";
-    public static final String DAILY_REMINDER_TIME = "07:00";
-    public static final String DAILY_REMINDER_MESSAGE = "BALIK LAGI DONG :)";
-    public static final String RELEASE_REMINDER_TIME = "08:00";
-    public static final String RELEASE_REMINDER_URL = "https://api.themoviedb.org/3/discover/movie?api_key=%s&primary_release_date.gte=%s&primary_release_date.lte=%s";
-
-    private Observer<ArrayList<Item>> observer = new Observer<ArrayList<Item>>() {
-        @Override
-        public void onChanged(ArrayList<Item> items) {
-            if (items != null) {
-                releaseReceiver.setUpReleaseAlarm(getApplicationContext(), RELEASE_REMINDER_TIME, items);
-                Log.d(TAG, items.size()+"");
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,17 +35,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottom_nav);
         msv = findViewById(R.id.msv_main);
         msv.setHint(getResources().getString(R.string.search));
-
-        releaseReceiver = new ReleaseReceiver();
-        alarmReceiver = new AlarmReceiver();
-        alarmReceiver.setUpAlarm(this, DAILY_REMINDER_TIME, getResources().getString(R.string.daily_reminder), AlarmReceiver.DAILY_REMINDER_TYPE);
-
-        ItemViewModel itemViewModel = ViewModelProviders.of(this).get(ItemViewModel.class);
-        itemViewModel.getListItem().observe(this, observer);
-        Date d = new Date();
-        CharSequence date = android.text.format.DateFormat.format(DATE_FORMAT, d.getTime());
-        itemViewModel.setItem(String.format(RELEASE_REMINDER_URL, ItemViewModel.API_KEY, date, date), ItemViewModel.ITEM_MOVIE);
-        Log.d(TAG, String.format(RELEASE_REMINDER_URL, ItemViewModel.API_KEY, date, date));
 
         String title = null;
 
