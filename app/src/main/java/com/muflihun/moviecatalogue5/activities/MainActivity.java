@@ -19,10 +19,11 @@ import com.muflihun.moviecatalogue5.fragments.MovieFragment;
 import com.muflihun.moviecatalogue5.fragments.TVShowFragment;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = MainActivity.class.getSimpleName();
     private BottomNavigationView bottomNav;
     private MaterialSearchView msv;
 
-    public final static String STATE_ID_MENU_ITEM_BOTTOM_NAV = "idMenuItem";
+    public static final String STATE_ID_MENU_ITEM_BOTTOM_NAV = "idMenuItem";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,8 +131,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu_change_language){
-            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+        Intent intent = null;
+        switch (item.getItemId()){
+            case R.id.menu_change_language:
+                intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                break;
+            case R.id.menu_set_reminder:
+                intent = new Intent(this, SetReminderActivity.class);
+                break;
+        }
+        if (intent!=null) {
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

@@ -47,7 +47,7 @@ public class ItemViewModel extends ViewModel {
 
                     for (int i=0; i<jArray.length(); i++){
                         JSONObject jItem = jArray.getJSONObject(i);
-                        list.add(new Item(jItem, item.equals("movie")? Item.MOVIE_DATA_KEYS: Item.TVSHOW_DATA_KEYS));
+                        list.add(new Item(jItem, item.equals(ITEM_MOVIE)? Item.MOVIE_DATA_KEYS: Item.TVSHOW_DATA_KEYS));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
