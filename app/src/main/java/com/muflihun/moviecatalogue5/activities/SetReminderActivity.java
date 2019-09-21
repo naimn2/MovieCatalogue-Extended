@@ -103,10 +103,10 @@ public class SetReminderActivity extends AppCompatActivity {
                     Log.d(TAG, preference.getKey()+" = "+newValue);
                     if (newValue.equals(true)){
                         alarmReceiver.setUpAlarm(getContext(), DAILY_REMINDER_TIME, DAILY_REMINDER_MESSAGE, AlarmReceiver.DAILY_REMINDER_TYPE);
-                        Toast.makeText(getContext(), "Daily Reminder On", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getResources().getString(R.string.daily_reminder_on), Toast.LENGTH_SHORT).show();
                     } else {
                         alarmReceiver.cancelAlarm(getContext());
-                        Toast.makeText(getContext(), "Daily Reminder Off", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getResources().getString(R.string.daily_reminder_off), Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case RELEASE_REMINDER_PREFERENCE_KEY:
@@ -119,10 +119,10 @@ public class SetReminderActivity extends AppCompatActivity {
                         CharSequence date = android.text.format.DateFormat.format(DATE_FORMAT, d.getTime());
                         itemViewModel.setItem(String.format(RELEASE_REMINDER_URL, ItemViewModel.API_KEY, date, date), ItemViewModel.ITEM_MOVIE);
                         Log.d(TAG, String.format(RELEASE_REMINDER_URL, ItemViewModel.API_KEY, date, date));
-                        Toast.makeText(getContext(), "Release Reminder On", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getResources().getString(R.string.release_reminder_on), Toast.LENGTH_SHORT).show();
                     } else {
                         releaseReceiver.cancelAlarm(getContext());
-                        Toast.makeText(getContext(), "Release Reminder Off", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getResources().getString(R.string.release_reminder_off), Toast.LENGTH_SHORT).show();
                     }
                     break;
             }

@@ -29,4 +29,8 @@
     <string name="daily_reminder">Daily Reminder</string>
     <string name="daily_title">Daily Reminder</string>
     <string name="release_reminder">Release Reminder</string>
+    <string name="daily_reminder_on">Daily Reminder On</string>
+    <string name="daily_reminder_off">Daily Reminder Off</string>
+    <string name="release_reminder_on">Release Reminder On</string>
+    <string name="release_reminder_off">Release Reminder On</string>
 </resources>
