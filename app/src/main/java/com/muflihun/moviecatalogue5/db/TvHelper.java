@@ -24,13 +24,13 @@ import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.VOTE
 
 public class TvHelper {
     private static final String DATABASE_TABLE = TABLE_TV;
-    private static DatabaseTvHelper databaseHelper;
+    private static DatabaseHelper databaseHelper;
     private static TvHelper INSTANCE;
 
     private static SQLiteDatabase database;
 
     private TvHelper(Context context) {
-        databaseHelper = new DatabaseTvHelper(context);
+        databaseHelper = new DatabaseHelper(context);
     }
 
     public static TvHelper getInstance(Context context) {

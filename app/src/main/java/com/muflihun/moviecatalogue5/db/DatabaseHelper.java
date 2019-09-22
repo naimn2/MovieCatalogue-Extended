@@ -28,6 +28,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseContract.TableColumns.POSTER,
             DatabaseContract.TableColumns.BACKDROP
     );
+
+    private static final String SQL_CREATE_TABLE_TV = String.format("CREATE TABLE %s"
+                    + " (%s INTEGER PRIMARY KEY," +
+                    " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +
+                    " %s REAL NOT NULL," +
+                    " %s REAL NOT NULL," +
+                    " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL)",
+            DatabaseContract.TABLE_TV,
+            DatabaseContract.TableColumns._ID,
+            DatabaseContract.TableColumns.TITLE,
+            DatabaseContract.TableColumns.OVERVIEW,
+            DatabaseContract.TableColumns.RELEASE_DATE,
+            DatabaseContract.TableColumns.LANGUAGE,
+            DatabaseContract.TableColumns.POPULARITY,
+            DatabaseContract.TableColumns.VOTE,
+            DatabaseContract.TableColumns.POSTER,
+            DatabaseContract.TableColumns.BACKDROP
+    );
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -35,11 +58,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_TABLE_MOVIE);
+        db.execSQL(SQL_CREATE_TABLE_TV);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.TABLE_MOVIE);
+        db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.TABLE_TV);
         onCreate(db);
     }
 }

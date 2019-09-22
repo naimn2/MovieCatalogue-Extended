@@ -69,7 +69,7 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
         if (listItem.size()>0){
             InputStream inputStream = null;
             try {
-                inputStream = new URL("https://image.tmdb.org/t/p/w185"+listItem.get(i).getBackdrop()).openStream();
+                inputStream = new URL("https://image.tmdb.org/t/p/w500"+listItem.get(i).getBackdrop()).openStream();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
