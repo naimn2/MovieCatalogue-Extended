@@ -96,12 +96,6 @@ public class DetailMovie extends AppCompatActivity {
     }
 
     private void addToFavorite(){
-//        long result = movieHelper.insert(this.item);
-//        if (result>0)
-//            Toast.makeText(this, getResources().getString(R.string.add_favorite), Toast.LENGTH_SHORT).show();
-//        else
-//            Toast.makeText(this, getResources().getString(R.string.fail_favorite), Toast.LENGTH_SHORT).show();
-
         ContentValues args = new ContentValues();
         args.put(_ID, item.getId());
         args.put(TITLE, item.getTitle());
@@ -113,18 +107,11 @@ public class DetailMovie extends AppCompatActivity {
         args.put(POSTER, item.getPoster());
         args.put(BACKDROP, item.getBackdrop());
 
-        Uri uri = getContentResolver().insert(CONTENT_URI_MOVIE, args);
+        getContentResolver().insert(CONTENT_URI_MOVIE, args);
         Toast.makeText(this, getResources().getString(R.string.add_favorite), Toast.LENGTH_SHORT).show();
     }
 
     private void removeFromFavorite(){
-//        int result = movieHelper.delete(item.getId());
-//        if (result > 0){
-//            Toast.makeText(this, getResources().getString(R.string.remove_favorite), Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(this, getResources().getString(R.string.fail_remove), Toast.LENGTH_SHORT).show();
-//        }
-
         Uri uri = getIntent().getData();
         getContentResolver().delete(uri, null, null);
         Toast.makeText(this, getResources().getString(R.string.remove_favorite), Toast.LENGTH_SHORT).show();

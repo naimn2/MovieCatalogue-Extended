@@ -111,7 +111,7 @@ public class MovieProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String s, String[] strings) {
-        if (uri.equals(CONTENT_URI_MOVIE)) {
+        if (uri.toString().contains(CONTENT_URI_MOVIE.toString())) {
             movieHelper.open();
             int deleted;
             switch (sUriMatcher.match(uri)) {

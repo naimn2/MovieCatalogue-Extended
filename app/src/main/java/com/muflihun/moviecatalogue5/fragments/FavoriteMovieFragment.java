@@ -61,17 +61,6 @@ public class FavoriteMovieFragment extends Fragment implements ListItemAdapter.O
     @Override
     public void onStart() {
         super.onStart();
-//        movieHelper.open();
-//        listItem.clear();
-//        listItem.addAll(movieHelper.getAllMovies());
-//        adapter.setOnClickCallback(this);
-//        adapter.setData(listItem);
-//        adapter.notifyDataSetChanged();
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-//        rvMovie.setLayoutManager(layoutManager);
-//        rvMovie.setAdapter(adapter);
-//        movieHelper.close();
-
         Cursor cursor = getContext().getContentResolver().query(CONTENT_URI_MOVIE, null, null, null, null);
         listItem.clear();
         listItem.addAll(MappingHelper.mapCursorToArrayList(cursor));
@@ -91,10 +80,4 @@ public class FavoriteMovieFragment extends Fragment implements ListItemAdapter.O
         intent.putExtra(DetailMovie.EXTRA_ITEM, item);
         startActivity(intent);
     }
-
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        movieHelper.close();
-//    }
 }

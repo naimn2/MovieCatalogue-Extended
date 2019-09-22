@@ -96,13 +96,6 @@ public class DetailTv extends AppCompatActivity {
     }
 
     private void addToFavorite(){
-//        long result = tvHelper.insert(this.item);
-//        if (result>0) {
-//            Toast.makeText(this, getResources().getString(R.string.add_favorite), Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(this, getResources().getString(R.string.fail_favorite), Toast.LENGTH_SHORT).show();
-//        }
-
         ContentValues args = new ContentValues();
         args.put(_ID, item.getId());
         args.put(TITLE, item.getTitle());
@@ -119,13 +112,6 @@ public class DetailTv extends AppCompatActivity {
     }
 
     private void removeFromFavorite(){
-//        int result = tvHelper.delete(item.getId());
-//        if (result > 0){
-//            Toast.makeText(this, getResources().getString(R.string.remove_favorite), Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(this, getResources().getString(R.string.fail_remove), Toast.LENGTH_SHORT).show();
-//        }
-
         Uri uri = getIntent().getData();
         getContentResolver().delete(uri, null, null);
         Toast.makeText(this, getResources().getString(R.string.remove_favorite), Toast.LENGTH_SHORT).show();

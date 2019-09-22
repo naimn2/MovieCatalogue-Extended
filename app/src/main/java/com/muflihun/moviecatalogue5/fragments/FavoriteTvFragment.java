@@ -70,17 +70,6 @@ public class FavoriteTvFragment extends Fragment implements ListItemAdapter.OnIt
     @Override
     public void onStart() {
         super.onStart();
-//        tvHelper.open();
-//        listItem.clear();
-//        listItem.addAll(tvHelper.getAllMovies());
-//        adapter.setOnClickCallback(this);
-//        adapter.setData(listItem);
-//        adapter.notifyDataSetChanged();
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-//        rvTv.setLayoutManager(layoutManager);
-//        rvTv.setAdapter(adapter);
-//        tvHelper.close();
-
         Cursor cursor = getContext().getContentResolver().query(CONTENT_URI_TV, null, null, null, null);
         listItem.clear();
         listItem.addAll(MappingHelper.mapCursorToArrayList(cursor));
