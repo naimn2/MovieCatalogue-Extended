@@ -35,7 +35,6 @@ import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.CONT
 public class MovieFragment extends Fragment implements ListItemAdapter.OnItemClickCallback {
 
     private static final String TAG = MovieFragment.class.getSimpleName();
-    private RecyclerView rvMovie;
     private ProgressBar pbMovie;
 
     private ListItemAdapter adapter;
@@ -63,7 +62,7 @@ public class MovieFragment extends Fragment implements ListItemAdapter.OnItemCli
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        rvMovie = view.findViewById(R.id.rv_movie);
+        RecyclerView rvMovie = view.findViewById(R.id.rv_movie);
         pbMovie = view.findViewById(R.id.pb_movie);
 
         adapter = new ListItemAdapter(getContext());

@@ -33,7 +33,6 @@ import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.CONT
  */
 public class FavoriteTvFragment extends Fragment implements ListItemAdapter.OnItemClickCallback {
     private RecyclerView rvTv;
-    private TvHelper tvHelper;
     private ListItemAdapter adapter;
     private ArrayList<Item> listItem;
 
@@ -53,7 +52,6 @@ public class FavoriteTvFragment extends Fragment implements ListItemAdapter.OnIt
 
         rvTv = view.findViewById(R.id.rv_fav_tv);
 
-        tvHelper = tvHelper.getInstance(getContext());
         adapter = new ListItemAdapter(getContext());
         listItem = new ArrayList<>();
     }

@@ -8,7 +8,6 @@ import android.content.ComponentName;
 import android.content.ContentValues;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -33,9 +32,6 @@ import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.TITL
 import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.VOTE;
 
 public class DetailTv extends AppCompatActivity {
-    private TextView tvTitle, tvDesc, tvPopularity, tvRating, tvRelease, tvLanguage;
-    private ImageView ivPoster, ivBackdrop;
-
     public static final String EXTRA_ITEM = "extraItem";
     private Item item;
     private TvHelper tvHelper;
@@ -49,14 +45,14 @@ public class DetailTv extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        tvTitle = findViewById(R.id.tv_title_detail_tv);
-        tvDesc = findViewById(R.id.tv_description_detail_tv);
-        tvPopularity = findViewById(R.id.tv_popularity_tv);
-        tvRating = findViewById(R.id.tv_rating_tv);
-        tvRelease = findViewById(R.id.tv_release_tv);
-        tvLanguage = findViewById(R.id.tv_language_tv);
-        ivPoster = findViewById(R.id.iv_poster_detail_tv);
-        ivBackdrop = findViewById(R.id.iv_backdrop_tv);
+        TextView tvTitle = findViewById(R.id.tv_title_detail_tv);
+        TextView tvDesc = findViewById(R.id.tv_description_detail_tv);
+        TextView tvPopularity = findViewById(R.id.tv_popularity_tv);
+        TextView tvRating = findViewById(R.id.tv_rating_tv);
+        TextView tvRelease = findViewById(R.id.tv_release_tv);
+        TextView tvLanguage = findViewById(R.id.tv_language_tv);
+        ImageView ivPoster = findViewById(R.id.iv_poster_detail_tv);
+        ImageView ivBackdrop = findViewById(R.id.iv_backdrop_tv);
 
         item = getIntent().getParcelableExtra(EXTRA_ITEM);
 

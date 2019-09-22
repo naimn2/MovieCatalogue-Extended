@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.muflihun.moviecatalogue5.BuildConfig;
 import com.muflihun.moviecatalogue5.models.Item;
 
 import org.json.JSONArray;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 
 public class ItemViewModel extends ViewModel {
-    public static final String API_KEY = "7f147371d293faae7c59388c4d5591f5";
+    public static final String API_KEY = BuildConfig.API_KEY;
     public static final String ITEM_MOVIE = "movie";
     public static final String ITEM_TVSHOW = "tv";
     public static final String LIST_MOVIE_URL = "https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+"&language=en-US";
@@ -32,7 +33,6 @@ public class ItemViewModel extends ViewModel {
     }
 
     public void setItem(final String url, final String item){
-//        String url = "https://api.themoviedb.org/3/discover/"+item+"?api_key="+API_KEY+"&language=en-US";
         final ArrayList<Item> list = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
 

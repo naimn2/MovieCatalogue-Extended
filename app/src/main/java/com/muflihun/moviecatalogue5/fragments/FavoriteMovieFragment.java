@@ -31,7 +31,6 @@ import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.CONT
  */
 public class FavoriteMovieFragment extends Fragment implements ListItemAdapter.OnItemClickCallback {
     private RecyclerView rvMovie;
-    private MovieHelper movieHelper;
     private static final String TAG = "FavoriteMovieFragment";
 
     private ListItemAdapter adapter;
@@ -53,7 +52,6 @@ public class FavoriteMovieFragment extends Fragment implements ListItemAdapter.O
 
         rvMovie = view.findViewById(R.id.rv_fav_movie);
 
-        movieHelper = MovieHelper.getInstance(getContext());
         listItem = new ArrayList<>();
         adapter = new ListItemAdapter(getContext());
     }

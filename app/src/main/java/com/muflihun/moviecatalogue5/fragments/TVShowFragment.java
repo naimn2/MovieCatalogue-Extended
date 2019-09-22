@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.CONTENT_URI_TV;
 
 public class TVShowFragment extends Fragment implements ListItemAdapter.OnItemClickCallback {
-    private RecyclerView rvTv;
     private ProgressBar pbTv;
 
     private ListItemAdapter adapter;
@@ -57,7 +56,7 @@ public class TVShowFragment extends Fragment implements ListItemAdapter.OnItemCl
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        rvTv = view.findViewById(R.id.rv_tv);
+        RecyclerView rvTv = view.findViewById(R.id.rv_tv);
         pbTv = view.findViewById(R.id.pb_tv);
 
         adapter = new ListItemAdapter(getContext());

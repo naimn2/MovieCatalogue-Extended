@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.muflihun.moviecatalogue5.R;
-import com.muflihun.moviecatalogue5.db.DatabaseContract;
 import com.muflihun.moviecatalogue5.db.MovieHelper;
 import com.muflihun.moviecatalogue5.models.Item;
 import com.muflihun.moviecatalogue5.widgets.FavoriteMovieWidget;
@@ -33,9 +32,6 @@ import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.TITL
 import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.VOTE;
 
 public class DetailMovie extends AppCompatActivity {
-    private TextView tvTitle, tvDesc, tvPopularity, tvRating, tvRelease, tvLanguage;
-    private ImageView ivPoster, ivBackdrop;
-
     public static final String EXTRA_ITEM = "extraItem";
     private Item item;
     private MovieHelper movieHelper;
@@ -49,14 +45,14 @@ public class DetailMovie extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        tvTitle = findViewById(R.id.tv_title_detail);
-        tvDesc = findViewById(R.id.tv_description_detail);
-        tvPopularity = findViewById(R.id.tv_popularity);
-        tvRating = findViewById(R.id.tv_rating);
-        tvRelease = findViewById(R.id.tv_release);
-        tvLanguage = findViewById(R.id.tv_language);
-        ivPoster = findViewById(R.id.iv_poster_detail);
-        ivBackdrop = findViewById(R.id.iv_backdrop);
+        TextView tvTitle = findViewById(R.id.tv_title_detail);
+        TextView tvDesc = findViewById(R.id.tv_description_detail);
+        TextView tvPopularity = findViewById(R.id.tv_popularity);
+        TextView tvRating = findViewById(R.id.tv_rating);
+        TextView tvRelease = findViewById(R.id.tv_release);
+        TextView tvLanguage = findViewById(R.id.tv_language);
+        ImageView ivPoster = findViewById(R.id.iv_poster_detail);
+        ImageView ivBackdrop = findViewById(R.id.iv_backdrop);
 
         item = getIntent().getParcelableExtra(EXTRA_ITEM);
 

@@ -87,19 +87,6 @@ public class TvHelper {
         return arrayList;
     }
 
-    public long insert(Item tv) {
-        ContentValues args = new ContentValues();
-        args.put(_ID, tv.getId());
-        args.put(TITLE, tv.getTitle());
-        args.put(OVERVIEW, tv.getOverview());
-        args.put(RELEASE_DATE, tv.getRelease());
-        args.put(LANGUAGE, tv.getLanguage());
-        args.put(POPULARITY, tv.getPopularity());
-        args.put(VOTE, tv.getVote());
-        args.put(POSTER, tv.getPoster());
-        args.put(BACKDROP, tv.getBackdrop());
-        return database.insert(DATABASE_TABLE, null, args);
-    }
 
     public boolean isExist(int id){
         String query = "SELECT * FROM "+DATABASE_TABLE+" WHERE "+_ID+" =?";
@@ -110,10 +97,6 @@ public class TvHelper {
         }
         cursor.close();
         return exist;
-    }
-
-    public int delete(int id) {
-        return database.delete(DATABASE_TABLE, _ID + " = '" + id + "'", null);
     }
 
     public Cursor queryByIdProvider(String id) {

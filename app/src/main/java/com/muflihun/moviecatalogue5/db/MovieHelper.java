@@ -88,20 +88,6 @@ public class MovieHelper {
         return arrayList;
     }
 
-    public long insert(Item movie) {
-        ContentValues args = new ContentValues();
-        args.put(_ID, movie.getId());
-        args.put(TITLE, movie.getTitle());
-        args.put(OVERVIEW, movie.getOverview());
-        args.put(RELEASE_DATE, movie.getRelease());
-        args.put(LANGUAGE, movie.getLanguage());
-        args.put(POPULARITY, movie.getPopularity());
-        args.put(VOTE, movie.getVote());
-        args.put(POSTER, movie.getPoster());
-        args.put(BACKDROP, movie.getBackdrop());
-        return database.insert(DATABASE_TABLE, null, args);
-    }
-
     public boolean isExist(int id){
         String query = "SELECT * FROM "+DATABASE_TABLE+" WHERE "+ BaseColumns._ID+" =?";
         Cursor cursor = database.rawQuery(query, new String[]{String.valueOf(id)});
@@ -111,10 +97,6 @@ public class MovieHelper {
         }
         cursor.close();
         return exist;
-    }
-
-    public int delete(int id) {
-        return database.delete(DATABASE_TABLE, _ID + " = '" + id + "'", null);
     }
 
     public Cursor queryByIdProvider(String id) {
