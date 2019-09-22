@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import static com.muflihun.moviecatalogue5.db.DatabaseContract.TABLE_MOVIE;
 import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.BACKDROP;
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns._ID;
 import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.LANGUAGE;
 import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.OVERVIEW;
 import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.POPULARITY;
@@ -89,7 +90,7 @@ public class MovieHelper {
 
     public long insert(Item movie) {
         ContentValues args = new ContentValues();
-        args.put(BaseColumns._ID, movie.getId());
+        args.put(_ID, movie.getId());
         args.put(TITLE, movie.getTitle());
         args.put(OVERVIEW, movie.getOverview());
         args.put(RELEASE_DATE, movie.getRelease());
@@ -112,20 +113,35 @@ public class MovieHelper {
         return exist;
     }
 
-    public int update(Item movie) {
-        ContentValues args = new ContentValues();
-        args.put(TITLE, movie.getTitle());
-        args.put(OVERVIEW, movie.getOverview());
-        args.put(RELEASE_DATE, movie.getRelease());
-        args.put(LANGUAGE, movie.getLanguage());
-        args.put(POPULARITY, movie.getPopularity());
-        args.put(VOTE, movie.getVote());
-        args.put(POSTER, movie.getPoster());
-        args.put(BACKDROP, movie.getBackdrop());
-        return database.update(DATABASE_TABLE, args, BaseColumns._ID + "= '" + movie.getId() + "'", null);
+    public int delete(int id) {
+        return database.delete(DATABASE_TABLE, _ID + " = '" + id + "'", null);
     }
 
-    public int delete(int id) {
-        return database.delete(DATABASE_TABLE, BaseColumns._ID + " = '" + id + "'", null);
+    public Cursor queryByIdProvider(String id) {
+        return database.query(DATABASE_TABLE, null
+                , _ID + " = ?"
+                , new String[]{id}
+                , null
+                , null
+                , null
+                , null);
+    }
+
+    public Cursor queryProvider() {
+        return database.query(DATABASE_TABLE
+                , null
+                , null
+                , null
+                , null
+                , null
+                , _ID + " ASC");
+    }
+
+    public long insertProvider(ContentValues values) {
+        return database.insert(DATABASE_TABLE, null, values);
+    }
+
+    public int deleteProvider(String id) {
+        return database.delete(DATABASE_TABLE, _ID + " = ?", new String[]{id});
     }
 }

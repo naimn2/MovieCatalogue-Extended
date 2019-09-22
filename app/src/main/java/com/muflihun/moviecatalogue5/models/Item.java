@@ -1,10 +1,14 @@
 package com.muflihun.moviecatalogue5.models;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.*;
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.*;
 
 public class Item implements Parcelable{
     private int id;
@@ -20,12 +24,28 @@ public class Item implements Parcelable{
     public Item() {
     }
 
-    public int getId() {
-        return id;
+    public Item(int id, String title, String poster, String overview, double vote, double popularity, String release, String language, String backdrop) {
+        this.id = id;
+        this.title = title;
+        this.poster = poster;
+        this.overview = overview;
+        this.vote = vote;
+        this.popularity = popularity;
+        this.release = release;
+        this.language = language;
+        this.backdrop = backdrop;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Item(Cursor cursor){
+        this.id = getColumnInt(cursor, _ID);
+        this.title = getColumnString(cursor, TITLE);
+        this.poster = getColumnString(cursor, POSTER);
+        this.overview = getColumnString(cursor, OVERVIEW);
+        this.vote = getColumnDouble(cursor, VOTE);
+        this.popularity = getColumnDouble(cursor, POPULARITY);
+        this.release = getColumnString(cursor, RELEASE_DATE);
+        this.language = getColumnString(cursor, LANGUAGE);
+        this.backdrop = getColumnString(cursor, BACKDROP);
     }
 
     public Item(JSONObject jObject, String[] keys) {
@@ -43,6 +63,15 @@ public class Item implements Parcelable{
             e.printStackTrace();
         }
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     protected Item(Parcel in) {
         id = in.readInt();

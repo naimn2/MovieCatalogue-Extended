@@ -2,7 +2,9 @@ package com.muflihun.moviecatalogue5.fragments;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +26,15 @@ import com.muflihun.moviecatalogue5.viewmodels.ItemViewModel;
 
 import java.util.ArrayList;
 
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.CONTENT_URI_MOVIE;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MovieFragment extends Fragment implements ListItemAdapter.OnItemClickCallback {
 
+    private static final String TAG = MovieFragment.class.getSimpleName();
     private RecyclerView rvMovie;
     private ProgressBar pbMovie;
 
@@ -76,6 +81,8 @@ public class MovieFragment extends Fragment implements ListItemAdapter.OnItemCli
     @Override
     public void onClicked(View v, Item item, int position) {
         Intent intent = new Intent(getContext(), DetailMovie.class);
+        Uri uri = Uri.parse(CONTENT_URI_MOVIE + "/" + item.getId());
+        intent.setData(uri);
         intent.putExtra(DetailMovie.EXTRA_ITEM, item);
         startActivity(intent);
     }

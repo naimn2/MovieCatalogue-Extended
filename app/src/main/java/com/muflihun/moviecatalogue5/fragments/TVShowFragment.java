@@ -1,6 +1,7 @@
 package com.muflihun.moviecatalogue5.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,8 @@ import com.muflihun.moviecatalogue5.models.Item;
 import com.muflihun.moviecatalogue5.viewmodels.ItemViewModel;
 
 import java.util.ArrayList;
+
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.CONTENT_URI_TV;
 
 public class TVShowFragment extends Fragment implements ListItemAdapter.OnItemClickCallback {
     private RecyclerView rvTv;
@@ -72,6 +75,8 @@ public class TVShowFragment extends Fragment implements ListItemAdapter.OnItemCl
     @Override
     public void onClicked(View v, Item item, int position) {
         Intent intent = new Intent(getContext(), DetailTv.class);
+        Uri uri = Uri.parse(CONTENT_URI_TV + "/" + item.getId());
+        intent.setData(uri);
         intent.putExtra(DetailMovie.EXTRA_ITEM, item);
         startActivity(intent);
     }

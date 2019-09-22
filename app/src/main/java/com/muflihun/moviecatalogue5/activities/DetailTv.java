@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
+import android.content.ContentValues;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +20,17 @@ import com.muflihun.moviecatalogue5.R;
 import com.muflihun.moviecatalogue5.db.TvHelper;
 import com.muflihun.moviecatalogue5.models.Item;
 import com.muflihun.moviecatalogue5.widgets.FavoriteMovieWidget;
+
+import static android.provider.BaseColumns._ID;
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.BACKDROP;
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.CONTENT_URI_TV;
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.LANGUAGE;
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.OVERVIEW;
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.POPULARITY;
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.POSTER;
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.RELEASE_DATE;
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.TITLE;
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.VOTE;
 
 public class DetailTv extends AppCompatActivity {
     private TextView tvTitle, tvDesc, tvPopularity, tvRating, tvRelease, tvLanguage;
@@ -83,21 +96,39 @@ public class DetailTv extends AppCompatActivity {
     }
 
     private void addToFavorite(){
-        long result = tvHelper.insert(this.item);
-        if (result>0) {
-            Toast.makeText(this, getResources().getString(R.string.add_favorite), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, getResources().getString(R.string.fail_favorite), Toast.LENGTH_SHORT).show();
-        }
+//        long result = tvHelper.insert(this.item);
+//        if (result>0) {
+//            Toast.makeText(this, getResources().getString(R.string.add_favorite), Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(this, getResources().getString(R.string.fail_favorite), Toast.LENGTH_SHORT).show();
+//        }
+
+        ContentValues args = new ContentValues();
+        args.put(_ID, item.getId());
+        args.put(TITLE, item.getTitle());
+        args.put(OVERVIEW, item.getOverview());
+        args.put(RELEASE_DATE, item.getRelease());
+        args.put(LANGUAGE, item.getLanguage());
+        args.put(POPULARITY, item.getPopularity());
+        args.put(VOTE, item.getVote());
+        args.put(POSTER, item.getPoster());
+        args.put(BACKDROP, item.getBackdrop());
+
+        Uri uri = getContentResolver().insert(CONTENT_URI_TV, args);
+        Toast.makeText(this, getResources().getString(R.string.add_favorite), Toast.LENGTH_SHORT).show();
     }
 
     private void removeFromFavorite(){
-        int result = tvHelper.delete(item.getId());
-        if (result > 0){
-            Toast.makeText(this, getResources().getString(R.string.remove_favorite), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, getResources().getString(R.string.fail_remove), Toast.LENGTH_SHORT).show();
-        }
+//        int result = tvHelper.delete(item.getId());
+//        if (result > 0){
+//            Toast.makeText(this, getResources().getString(R.string.remove_favorite), Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(this, getResources().getString(R.string.fail_remove), Toast.LENGTH_SHORT).show();
+//        }
+
+        Uri uri = getIntent().getData();
+        getContentResolver().delete(uri, null, null);
+        Toast.makeText(this, getResources().getString(R.string.remove_favorite), Toast.LENGTH_SHORT).show();
     }
 
     @Override

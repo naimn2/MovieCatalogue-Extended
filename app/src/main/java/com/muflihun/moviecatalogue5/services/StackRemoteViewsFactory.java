@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.RemoteViewsService;
 import com.muflihun.moviecatalogue5.R;
 import com.muflihun.moviecatalogue5.db.MovieHelper;
 import com.muflihun.moviecatalogue5.db.TvHelper;
+import com.muflihun.moviecatalogue5.helpers.MappingHelper;
 import com.muflihun.moviecatalogue5.models.Item;
 import com.muflihun.moviecatalogue5.widgets.FavoriteMovieWidget;
 
@@ -22,7 +24,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     private ArrayList<Item> listItem;

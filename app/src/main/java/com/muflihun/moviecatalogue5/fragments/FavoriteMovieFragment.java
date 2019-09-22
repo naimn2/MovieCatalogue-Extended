@@ -2,6 +2,8 @@ package com.muflihun.moviecatalogue5.fragments;
 
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +19,12 @@ import com.muflihun.moviecatalogue5.R;
 import com.muflihun.moviecatalogue5.activities.DetailMovie;
 import com.muflihun.moviecatalogue5.adapters.ListItemAdapter;
 import com.muflihun.moviecatalogue5.db.MovieHelper;
+import com.muflihun.moviecatalogue5.helpers.MappingHelper;
 import com.muflihun.moviecatalogue5.models.Item;
 
 import java.util.ArrayList;
+
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.CONTENT_URI_MOVIE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,21 +61,33 @@ public class FavoriteMovieFragment extends Fragment implements ListItemAdapter.O
     @Override
     public void onStart() {
         super.onStart();
-        movieHelper.open();
+//        movieHelper.open();
+//        listItem.clear();
+//        listItem.addAll(movieHelper.getAllMovies());
+//        adapter.setOnClickCallback(this);
+//        adapter.setData(listItem);
+//        adapter.notifyDataSetChanged();
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+//        rvMovie.setLayoutManager(layoutManager);
+//        rvMovie.setAdapter(adapter);
+//        movieHelper.close();
+
+        Cursor cursor = getContext().getContentResolver().query(CONTENT_URI_MOVIE, null, null, null, null);
         listItem.clear();
-        listItem.addAll(movieHelper.getAllMovies());
+        listItem.addAll(MappingHelper.mapCursorToArrayList(cursor));
         adapter.setOnClickCallback(this);
         adapter.setData(listItem);
         adapter.notifyDataSetChanged();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvMovie.setLayoutManager(layoutManager);
         rvMovie.setAdapter(adapter);
-        movieHelper.close();
     }
 
     @Override
     public void onClicked(View v, Item item, int position) {
         Intent intent = new Intent(getContext(), DetailMovie.class);
+        Uri uri = Uri.parse(CONTENT_URI_MOVIE + "/" + item.getId());
+        intent.setData(uri);
         intent.putExtra(DetailMovie.EXTRA_ITEM, item);
         startActivity(intent);
     }

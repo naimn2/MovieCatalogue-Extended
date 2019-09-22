@@ -11,7 +11,7 @@ import com.muflihun.moviecatalogue5.models.Item;
 
 import java.util.ArrayList;
 
-import static android.provider.BaseColumns._ID;
+import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns._ID;
 import static com.muflihun.moviecatalogue5.db.DatabaseContract.TABLE_TV;
 import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.BACKDROP;
 import static com.muflihun.moviecatalogue5.db.DatabaseContract.TableColumns.LANGUAGE;
@@ -112,20 +112,35 @@ public class TvHelper {
         return exist;
     }
 
-    public int update(Item tv) {
-        ContentValues args = new ContentValues();
-        args.put(TITLE, tv.getTitle());
-        args.put(OVERVIEW, tv.getOverview());
-        args.put(RELEASE_DATE, tv.getRelease());
-        args.put(LANGUAGE, tv.getLanguage());
-        args.put(POPULARITY, tv.getPopularity());
-        args.put(VOTE, tv.getVote());
-        args.put(POSTER, tv.getPoster());
-        args.put(BACKDROP, tv.getBackdrop());
-        return database.update(DATABASE_TABLE, args, _ID + "= '" + tv.getId() + "'", null);
-    }
-
     public int delete(int id) {
         return database.delete(DATABASE_TABLE, _ID + " = '" + id + "'", null);
+    }
+
+    public Cursor queryByIdProvider(String id) {
+        return database.query(DATABASE_TABLE, null
+                , _ID + " = ?"
+                , new String[]{id}
+                , null
+                , null
+                , null
+                , null);
+    }
+
+    public Cursor queryProvider() {
+        return database.query(DATABASE_TABLE
+                , null
+                , null
+                , null
+                , null
+                , null
+                , _ID + " ASC");
+    }
+
+    public long insertProvider(ContentValues values) {
+        return database.insert(DATABASE_TABLE, null, values);
+    }
+
+    public int deleteProvider(String id) {
+        return database.delete(DATABASE_TABLE, _ID + " = ?", new String[]{id});
     }
 }
