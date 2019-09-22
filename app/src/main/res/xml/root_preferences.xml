@@ -18,8 +18,7 @@
 
     <SwitchPreferenceCompat
         app:key="dailyReminder"
-        app:title="Enable Daily Reminder"
-        />
+        app:title="Enable Daily Reminder" />
 
     <SwitchPreferenceCompat
         app:key="releaseReminder"

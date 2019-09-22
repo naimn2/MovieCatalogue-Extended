@@ -85,6 +85,8 @@ public class SetReminderActivity extends AppCompatActivity {
 
             SwitchPreferenceCompat dailyReminderSwitch = findPreference(DAILY_REMINDER_PREFERENCE_KEY);
             SwitchPreferenceCompat releaseReminderSwitch = findPreference(RELEASE_REMINDER_PREFERENCE_KEY);
+            dailyReminderSwitch.setTitle(R.string.daily_reminder);
+            releaseReminderSwitch.setTitle(R.string.release_reminder);
 
             dailyReminderSwitch.setOnPreferenceChangeListener(this);
             releaseReminderSwitch.setOnPreferenceChangeListener(this);
@@ -113,7 +115,7 @@ public class SetReminderActivity extends AppCompatActivity {
                     Log.d(TAG, preference.getKey()+" = "+newValue);
                     if (newValue.equals(true)){
                         progressDialog = new ProgressDialog(getContext());
-                        progressDialog.setMessage("Switching On Release Reminder");
+                        progressDialog.setMessage(getContext().getResources().getString(R.string.switching_on_release_reminder));
                         progressDialog.show();
                         Date d = new Date();
                         CharSequence date = android.text.format.DateFormat.format(DATE_FORMAT, d.getTime());

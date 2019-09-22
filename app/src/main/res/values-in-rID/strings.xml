@@ -33,4 +33,5 @@
     <string name="release_reminder_on">Pengingat Rilis Nyala</string>
     <string name="release_reminder_off">Pengingat Rilis Mati</string>
     <string name="title_activity_set_reminder">Pengaturan</string>
+    <string name="switching_on_release_reminder">Mengaktifkan Pengingat Rilis Harian</string>
 </resources>
